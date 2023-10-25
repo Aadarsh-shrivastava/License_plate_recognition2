@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block body %}
+<div class="container">
+  <div class="centered-content">
+    <h1 class="text-center">Upload a Video</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <div class="form-group text-center">
+        <video
+          id="videoPreview"
+          controls
+          style="max-width: 100%; max-height: 200px; display: none"
+        ></video>
+        <p id="noVideoMessage" class="text-center">No video is uploaded.</p>
+      </div>
+      <div class="form-group text-center">
+        <input
+          type="file"
+          name="file"
+          class="form-control-file"
+          accept=".mp4, .avi, .mkv, .mov"
+          id="fileInput"
+        />
+      </div>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("fileInput")
+    .addEventListener("change", function (event) {
+      const videoPreview = document.getElementById("videoPreview");
+      const noVideoMessage = document.getElementById("noVideoMessage");
+      const file = event.target.files[0];
+      if (file) {
+        const objectURL = URL.createObjectURL(file);
+        videoPreview.src = objectURL;
+        videoPreview.style.display = "block";
+        noVideoMessage.style.display = "none";
+      } else {
+        videoPreview.src = "";
+        videoPreview.style.display = "none";
+        noVideoMessage.style.display = "block";
+      }
+    });
+</script>
+{% endblock body %}

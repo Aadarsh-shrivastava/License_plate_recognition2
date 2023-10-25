@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block body %}
+<div class="container">
+  <h1>Car List</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Car ID</th>
+        <th>License Plate Number</th>
+        <th>time stamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for key,val in data.items() %}
+      <tr>
+        <td>{{key}}</td>
+        <td>{{val.text}}</td>
+        <td>{{val.current_time}}</td>
+      </tr>
+      {% endfor %}
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+</div>
+{% endblock body %}
